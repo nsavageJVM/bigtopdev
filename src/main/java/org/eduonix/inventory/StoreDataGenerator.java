@@ -12,6 +12,7 @@ import org.apache.pig.ExecType;
 import org.eduonix.StoreInventoryRunner;
 import org.eduonix.datagenerator.StoreJob;
 
+import org.eduonix.etl.PigCSVCleaner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -88,6 +89,14 @@ public class StoreDataGenerator {
     );
 
         return analytics;
+    }
+
+
+    public void runPig(Path inputPath, Path outputPath) throws Exception {
+
+        PigCSVCleaner pigAgg = new  PigCSVCleaner(inputPath, outputPath);
+        pigAgg.doAgg();
+
     }
 
 

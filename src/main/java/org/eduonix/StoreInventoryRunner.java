@@ -20,7 +20,14 @@ public class StoreInventoryRunner {
 
    static  int records = 200;
    static  String  match  = "AK";
-   public static boolean devMode = false;
+   public static boolean devMode = true;
+
+
+    static Path pigInput = new Path("./store/inventory","part-r-00000");
+
+
+
+    static Path PIG_CLEANED = new Path("./analytics/cleaned");
 
 
     public static void main(String[] args) throws Exception {
@@ -28,6 +35,11 @@ public class StoreInventoryRunner {
 
           StoreDataGenerator storeData = new StoreDataGenerator();
           storeData.setUpMockData(records);
+
+        if(StoreInventoryRunner.devMode) {
+
+            storeData.runPig(pigInput, PIG_CLEANED);
+        }
 
     }
 
