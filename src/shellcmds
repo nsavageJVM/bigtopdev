@@ -1,0 +1,15 @@
+hadoop fs -mkdir /user/root/scripts
+hadoop fs -copyFromLocal analytics.pig /user/root/scripts
+hadoop fs -copyFromLocal BigTopDevGenerate.jar /user/
+hadoop jar BigTopDevGenerate.jar StoreInventoryRunner
+hadoop fs -rm -r /user/BigTopDevGenerate.jar
+
+hadoop fs -copyFromLocal BigTopDevSearch.jar /user/
+hadoop jar BigTopDevSearch.jar StoreAnalytics
+hadoop fs -rm -r /user/BigTopDevSearch.jar
+
+hadoop fs -copyToLocal  /user/root/analytics
+
+mvn dependency:tree -Dincludes=google-collection:google-collection
+
+
