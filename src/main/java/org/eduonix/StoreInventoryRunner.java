@@ -20,7 +20,7 @@ public class StoreInventoryRunner {
 
    static  int records = 200;
    static  String  match  = "AK";
-   public static boolean devMode = true;
+   public static boolean devMode = false;
 
 
     static Path pigInput = new Path("./store/inventory","part-r-00000");

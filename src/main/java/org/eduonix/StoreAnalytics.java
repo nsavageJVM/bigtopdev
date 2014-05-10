@@ -21,6 +21,22 @@ public class StoreAnalytics {
 
 
     static  String  match  = "AK";
+    static String searchPath;
+
+    static {
+
+        if(StoreInventoryRunner.devMode) {
+            searchPath ="bigtopdev/analytics/cleaned";
+
+
+        }  else {
+            searchPath ="analytics/cleaned";
+
+        }
+    }
+
+
+
 
     public static void main(String[] args) throws Exception {
 
@@ -38,10 +54,11 @@ public class StoreAnalytics {
 
 
         FileSystem fs = FileSystem.get(new Configuration());
+        System.out.println("HDFS Home  Directory " +fs.getHomeDirectory() ) ;
 
-
-        Path doSearch = new Path(fs.getHomeDirectory(),"analytics/cleaned");
+        Path doSearch = new Path(fs.getHomeDirectory(),searchPath);
         System.out.println("HDFS  Directory " +doSearch.toString() ) ;
+
         FileStatus[] hdfsFiles=fs.listStatus(doSearch);
         //print out all the files.
         for(FileStatus stat : hdfsFiles){
@@ -75,7 +92,7 @@ public class StoreAnalytics {
         Path p;
         try {
             fs = FileSystem.get(new Configuration());
-            Path doSearch = new Path(fs.getHomeDirectory(),"analytics/cleaned");
+            Path doSearch = new Path(fs.getHomeDirectory(),searchPath);
             System.out.println("fs.open(base)" +fs.getHomeDirectory());
             System.out.println("fs.open(base)" +doSearch.toString());
            if(fs.exists(doSearch)) {

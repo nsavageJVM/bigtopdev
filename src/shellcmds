@@ -1,5 +1,3 @@
-hadoop fs -mkdir /user/root/scripts
-hadoop fs -copyFromLocal analytics.pig /user/root/scripts
 hadoop fs -copyFromLocal BigTopDevGenerate.jar /user/
 hadoop jar BigTopDevGenerate.jar StoreInventoryRunner
 hadoop fs -rm -r /user/BigTopDevGenerate.jar
